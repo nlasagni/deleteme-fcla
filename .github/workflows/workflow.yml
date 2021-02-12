@@ -5,6 +5,41 @@ on:
       - main
       - develop
 jobs:
+  run-tests:
+    name: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Chmode gradlew
+        run: chmod +x ./gradlew
+      - name: Run tests
+        run: ./gradlew test
+  generate-and-deploy-coverage:
+    needs: run-tests
+    name: generate-and-deploy-coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Chmode gradlew
+        run: chmod +x ./gradlew
+      - name: Run Tests
+        run: ./gradlew test --continue
+      - name: Generate Jacoco report
+        run: ./gradlew jacocoTestReport
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
   generate-and-deploy-project-doc:
     name: generate-and-deploy-project-doc
     runs-on: ubuntu-latest
@@ -37,23 +72,3 @@ jobs:
           #branch: gh-pages
           #folder: build/reports/jacoco/test/html
           #target-folder: jacoco
-  generate-and-deploy-coverage:
-    name: generate-and-deploy-coverage
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Set up JDK
-        uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Chmode gradlew
-        run: chmod +x ./gradlew
-      - name: Run Tests
-        run: ./gradlew test --continue
-      - name: Generate Jacoco report
-        run: ./gradlew jacocoTestReport
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          fail_ci_if_error: true
