@@ -17,6 +17,6 @@ class CounterTest : FreeSpec({
     "Counter is incremented by one per time" - {
         val counter = Counter()
         counter.inc()
-        assert(Counter().getValue() == 1)
+        assert(counter.getValue() == 1)
     }
 })
