@@ -21,7 +21,7 @@ jobs:
           branch: gh-pages
           folder: emptyFolder
       - name: Generate Dokka docs
-        run: ./gradlew dokkaHtml
+        run: ./gradlew dokkaJavadoc
       - name: Deploy Dokka docs
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
