@@ -1,1 +1,0 @@
-var typeSearchIndex = [{"p":"com.deletemefcla","l":"MainClass.MainClass","url":"com/deletemefcla/MainClass.MainClass.html"}, {"p":"com.deletemefcla","l":"MainClass","url":"com/deletemefcla/MainClass.html"}, {"p":"com.deletemefcla","l":"MainKt","url":"com/deletemefcla/MainKt.html"}, {"l":"All classes","url":"allclasses.html"}]
