@@ -3,12 +3,12 @@ package com.deletemefcla
 class MainClass {
 
     companion object MainClass {
-        fun printHelloWorld() {
-            println("Hello World!")
+        fun generateHelloWorld(): String {
+            return "Hello World!"
         }
     }
 }
 
 fun main() {
-    MainClass.printHelloWorld()
+    println(MainClass.generateHelloWorld())
 }
