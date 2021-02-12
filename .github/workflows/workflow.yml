@@ -1,5 +1,9 @@
 name: deleteme-fcla-workflow
-on: push
+on:
+  push:
+    branches:
+      - main
+      - develop
 jobs:
   generate-and-deploy-project-doc:
     name: generate-and-deploy-project-doc
@@ -27,16 +31,19 @@ jobs:
         with:
           branch: gh-pages
           folder: build/dokka/javadoc
-          target-folder: dokka
+      #- name: Deploy Jacoco report
+        #uses: JamesIves/github-pages-deploy-action@4.0.0
+        #with:
+          #branch: gh-pages
+          #folder: build/reports/jacoco/test/html
+          #target-folder: jacoco
+  generate-and-deploy-coverage:
+    name: generate-and-deploy-coverage
+    runs-on: ubuntu-latest
+    steps:
       - name: Generate Jacoco report
         run: ./gradlew test jacocoTestReport
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
           fail_ci_if_error: true
-      - name: Deploy Jacoco report
-        uses: JamesIves/github-pages-deploy-action@4.0.0
-        with:
-          branch: gh-pages
-          folder: build/reports/jacoco/test/html
-          target-folder: jacoco
