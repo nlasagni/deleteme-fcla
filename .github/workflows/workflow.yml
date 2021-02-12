@@ -21,6 +21,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: gh-pages
-          folder: build/dokka/html
-      - name: Remove local docs
-        run: rm -rf build/dokka/html
+          folder: build/dokka/html/deleteme-fcla
