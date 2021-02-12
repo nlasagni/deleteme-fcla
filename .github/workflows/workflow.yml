@@ -1,7 +1,9 @@
 name: deleteme-fcla-workflow
 on: push
 jobs:
-  generate-and-deploy-doc:
+  generate-and-deploy-project-doc:
+    name: generate-and-deploy-project-doc
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
