@@ -30,6 +30,10 @@ jobs:
           target-folder: dokka
       - name: Generate Jacoco report
         run: ./gradlew test jacocoTestReport
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          fail_ci_if_error: true
       - name: Deploy Jacoco report
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
