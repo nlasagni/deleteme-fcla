@@ -1,6 +1,3 @@
----
-title: deleteme-fcla -
----
 //[deleteme-fcla](index.md)
 
 
@@ -12,5 +9,5 @@ title: deleteme-fcla -
   
 |  Name|  Summary| 
 |---|---|
-| [[root]]([root]/index.md) | 
+| [com.deletemefcla](com.deletemefcla/index.md) | 
 
