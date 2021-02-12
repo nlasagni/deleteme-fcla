@@ -20,3 +20,24 @@ jobs:
         with:
           branch: gh-pages
           folder: build/dokka/html
+          target-folder: dokka
+  generate-and-deploy-coverage:
+    name: generate-and-deploy-coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Chmode gradlew
+        run: chmod +x ./gradlew
+      - name: Generate docs
+        run: ./gradlew test jacocoTestReport
+      - name: Deploy coverage
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: build/reports/jacoco/test/html
+          target-folder: jacoco

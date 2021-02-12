@@ -35,7 +35,7 @@ dependencies {
 }
 
 detekt {
-    failFast = true
+    failFast = false
     buildUponDefaultConfig = true
 }
 
@@ -43,10 +43,10 @@ tasks.jar {
     // Otherwise it throws a "No main manifest attribute" error
     manifest {
         attributes(
-                mapOf(
-                        "Main-Class" to myMainClass,
-                        "Implementation-Version" to archiveVersion
-                )
+            mapOf(
+                "Main-Class" to myMainClass,
+                "Implementation-Version" to archiveVersion
+            )
         )
     }
     // All the dependencies needed by our application doesn't exists in the same classpath where our .jar resides.
@@ -96,4 +96,3 @@ application {
     // Define the main class for the application
     mainClass.set(myMainClass)
 }
-
