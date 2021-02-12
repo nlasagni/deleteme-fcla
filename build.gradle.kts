@@ -1,4 +1,4 @@
-val myMainClass = "MainClassKt"
+val myMainClass = "com.deletemefcla.MainClassKt"
 
 repositories {
     jcenter()

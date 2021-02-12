@@ -14,9 +14,9 @@ jobs:
       - name: Chmode gradlew
         run: chmod +x ./gradlew
       - name: Generate docs
-        run: ./gradlew dokkaJekyll
+        run: ./gradlew dokkaGfm
       - name: Deploy docs
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: gh-pages
-          folder: build/dokka/jekyll
+          folder: build/dokka/gfm/deleteme-fcla
