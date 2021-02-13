@@ -12,7 +12,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Checkout and Setup
-        uses: ./.github/checkout_and_setup
+        uses: ./.github/checkout-and-setup
       - name: Run tests
         run: ./gradlew test
   generate-and-deploy-coverage:
@@ -35,6 +35,7 @@ jobs:
         with:
           fail_ci_if_error: true
   generate-and-deploy-project-doc:
+    needs: run-tests
     name: generate-and-deploy-project-doc
     runs-on: ubuntu-latest
     steps:
