@@ -12,7 +12,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Checkout and Setup
-        uses: ./.github/checkout-and-setup
+        uses: ./.github/actions/checkout_and_setup
       - name: Run tests
         run: ./gradlew test
   generate-and-deploy-coverage:
