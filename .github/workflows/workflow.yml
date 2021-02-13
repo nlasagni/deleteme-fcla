@@ -32,10 +32,8 @@ jobs:
           java-version: 11
       - name: Chmode gradlew
         run: chmod +x ./gradlew
-      - name: Run Tests
-        run: ./gradlew test --continue
       - name: Generate Jacoco report
-        run: ./gradlew jacocoTestReport
+        run: ./gradlew test jacocoTestReport
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
