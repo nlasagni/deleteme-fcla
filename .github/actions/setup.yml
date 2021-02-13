@@ -1,5 +1,5 @@
-name: 'checkout-and-setup'
-description: 'action for compile, check, build and test'
+name: 'setup'
+description: 'action for setup'
 runs:
   using: "composite"
   steps:
