@@ -6,7 +6,6 @@ on:
       - develop
 jobs:
   generate-and-deploy-coverage:
-    needs: run-tests
     name: generate-and-deploy-coverage
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +26,6 @@ jobs:
         with:
           fail_ci_if_error: true
   generate-and-deploy-project-doc:
-    needs: run-tests
     name: generate-and-deploy-project-doc
     runs-on: ubuntu-latest
     steps:
