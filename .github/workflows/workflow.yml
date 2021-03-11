@@ -40,9 +40,9 @@ jobs:
       - name: Chmode gradlew
         run: chmod +x ./gradlew
       - name: Generate Dokka docs
-        run: ./gradlew dokkaJavadoc
+        run: ./gradlew dokkaHtml
       - name: Deploy Dokka docs
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: gh-pages
-          folder: build/dokka/javadoc
+          folder: build/dokka/html
