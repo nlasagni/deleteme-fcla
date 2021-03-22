@@ -20,7 +20,15 @@ plugins {
 }
 
 subprojects {
-    plugins.apply("org.jetbrains.dokka")
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.danilopianini.git-sensitive-semantic-versioning")
+    apply(plugin = "org.gradle.jacoco")
+    apply(plugin = "pl.droidsonroids.jacoco.testkit")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = "org.jetbrains.dokka")
+    apply(plugin = "org.gradle.distribution")
+    apply(plugin = "org.gradle.application")
 }
 
 
