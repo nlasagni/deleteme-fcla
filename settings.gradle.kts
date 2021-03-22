@@ -8,3 +8,5 @@ buildscript {
 bootstrapRefreshVersions()
 
 rootProject.name = "deleteme-fcla"
+include("app")
+include("lib")

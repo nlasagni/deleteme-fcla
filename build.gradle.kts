@@ -1,7 +1,9 @@
 val myMainClass = "com.deletemefcla.MainClassKt"
 
-repositories {
-    jcenter()
+allprojects {
+    repositories {
+        jcenter()
+    }
 }
 
 plugins {
@@ -16,6 +18,11 @@ plugins {
     id("org.jetbrains.dokka")
     application
 }
+
+subprojects {
+    plugins.apply("org.jetbrains.dokka")
+}
+
 
 gitSemVer {
     version = computeGitSemVer()

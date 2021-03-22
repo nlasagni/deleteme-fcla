@@ -39,10 +39,17 @@ jobs:
           java-version: 11
       - name: Chmode gradlew
         run: chmod +x ./gradlew
+      #- name: Create empty folder
+       # run: mkdir emptyFolder
+      #- name: Empty gh-pages
+       # uses: JamesIves/github-pages-deploy-action@4.0.0
+        #with:
+         # branch: gh-pages
+          #folder: emptyFolder
       - name: Generate Dokka docs
-        run: ./gradlew dokkaHtml
+        run: ./gradlew dokkaHtmlMultiModule
       - name: Deploy Dokka docs
         uses: JamesIves/github-pages-deploy-action@4.0.0
         with:
           branch: gh-pages
-          folder: build/dokka/html
+          folder: build/dokka/htmlMultiModule
