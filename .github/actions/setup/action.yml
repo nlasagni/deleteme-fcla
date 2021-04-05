@@ -1,0 +1,11 @@
+name: 'setup'
+description: 'action for setup'
+runs:
+  using: "composite"
+  steps:
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Chmode gradlew
+      run: chmod +x ./gradlew

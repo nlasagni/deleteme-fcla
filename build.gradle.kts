@@ -1,9 +1,5 @@
 val myMainClass = "com.deletemefcla.MainClassKt"
 
-repositories {
-    jcenter()
-}
-
 plugins {
     // In order to build a Kotlin project with Gradle:
     kotlin("jvm")
@@ -15,6 +11,37 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
     id("org.jetbrains.dokka")
     application
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
+    apply(plugin = "org.danilopianini.git-sensitive-semantic-versioning")
+    apply(plugin = "org.gradle.jacoco")
+    apply(plugin = "pl.droidsonroids.jacoco.testkit")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = "org.jetbrains.dokka")
+    apply(plugin = "org.gradle.distribution")
+    apply(plugin = "org.gradle.application")
+
+    dependencies {
+        implementation(kotlin("stdlib-jdk8"))
+
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.50")
+
+        testImplementation(gradleTestKit())
+        testImplementation("io.kotest:kotest-runner-junit5:4.2.5")
+        testImplementation("io.kotest:kotest-assertions-core:4.2.5")
+        testImplementation("io.kotest:kotest-assertions-core-jvm:4.2.5")
+
+        detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.14.1")
+    }
 }
 
 gitSemVer {

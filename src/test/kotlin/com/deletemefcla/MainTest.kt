@@ -7,6 +7,6 @@ import io.kotest.core.spec.style.FreeSpec
  */
 class MainTest : FreeSpec({
     "Test hello world" - {
-        assert("Hello World!" == MainClass.generateHelloWorld())
+        assert("Hello World Robert!" == Main.generateHelloWorld("Robert"))
     }
 })

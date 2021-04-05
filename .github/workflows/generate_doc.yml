@@ -1,0 +1,35 @@
+name: Generate Docs
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+jobs:
+  generate-doc:
+    name: Generate and deploy project doc
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Chmode gradlew
+        run: chmod +x ./gradlew
+          #- name: Create empty folder
+          # run: mkdir emptyFolder
+          #- name: Empty gh-pages
+          # uses: JamesIves/github-pages-deploy-action@4.0.0
+          #with:
+          # branch: gh-pages
+        # folder: emptyFolder
+      - name: Generate Dokka docs
+        run: ./gradlew dokkaHtmlMultiModule
+      - name: Deploy Dokka docs
+        uses: JamesIves/github-pages-deploy-action@4.0.0
+        with:
+          branch: gh-pages
+          folder: build/dokka/htmlMultiModule
