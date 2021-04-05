@@ -1,6 +1,5 @@
 name: Generate Coverage
 on:
-  push:
   pull_request:
     types: [closed]
     branches:
