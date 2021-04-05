@@ -1,9 +1,6 @@
 name: Generate Coverage
 on:
-  pull_request:
-    types: [closed]
-    branches:
-      - main
+  push:
 jobs:
   generate-coverage:
     name: Generate and deploy coverage
@@ -28,6 +25,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           override_pr: ${{ github.event.number }}
-          override_sha: ${{ github.event.pull_request.head.sha }}
-          directory: build/reports/jacoco/test/
+          override_sha: ${{ github.event.pull_request.head.sha }
+          functionalities:
+            recursesubs: true
           fail_ci_if_error: true
