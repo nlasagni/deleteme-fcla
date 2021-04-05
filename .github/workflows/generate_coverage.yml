@@ -25,6 +25,5 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           override_pr: ${{ github.event.number }}
           override_sha: ${{ github.event.pull_request.head.sha }}
-          functionalities:
-            recursesubs: true
+          recursesubs: true
           fail_ci_if_error: true
