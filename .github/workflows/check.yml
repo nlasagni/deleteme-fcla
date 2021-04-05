@@ -5,8 +5,8 @@ on:
       - main
       - develop
 jobs:
-  generate-and-deploy-coverage:
-    name: generate-and-deploy-coverage
+  check:
+    name: Check project
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository

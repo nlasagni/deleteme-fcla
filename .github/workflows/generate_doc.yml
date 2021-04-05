@@ -5,8 +5,8 @@ on:
     branches:
       - main
 jobs:
-  generate-and-deploy-project-doc:
-    name: generate-and-deploy-project-doc
+  generate-doc:
+    name: Generate and deploy project doc
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
