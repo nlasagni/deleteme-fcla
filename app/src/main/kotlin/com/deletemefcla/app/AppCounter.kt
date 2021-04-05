@@ -20,5 +20,4 @@ class AppCounter {
     fun getValue(): Int {
         return value
     }
-
 }

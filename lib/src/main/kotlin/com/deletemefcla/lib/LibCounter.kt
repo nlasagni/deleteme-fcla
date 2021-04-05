@@ -20,5 +20,4 @@ class LibCounter {
     fun getValue(): Int {
         return value
     }
-
 }

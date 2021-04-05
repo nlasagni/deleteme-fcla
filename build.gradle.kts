@@ -42,9 +42,7 @@ subprojects {
 
         detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.14.1")
     }
-
 }
-
 
 gitSemVer {
     version = computeGitSemVer()

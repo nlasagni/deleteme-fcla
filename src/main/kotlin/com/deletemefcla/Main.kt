@@ -1,14 +1,14 @@
 package com.deletemefcla
 
-class MainClass {
+class Main private constructor() {
 
-    companion object MainClass {
-        fun generateHelloWorld(): String {
-            return "Hello World!"
+    companion object Main {
+        fun generateHelloWorld(name: String): String {
+            return "Hello World $name!"
         }
     }
 }
 
 fun main() {
-    println(MainClass.generateHelloWorld())
+    println(Main.generateHelloWorld("Robert"))
 }
