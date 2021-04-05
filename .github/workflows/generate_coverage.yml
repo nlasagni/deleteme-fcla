@@ -17,10 +17,9 @@ jobs:
       - name: Chmode gradlew
         run: chmod +x ./gradlew
       - name: Generate Jacoco report
-        run: ./gradlew test jacocoTestReport
+        run: ./gradlew aggregateJacocoReport
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          recursesubs: true
+          directory: build/reports/jacoco/aggregate/
           fail_ci_if_error: true
