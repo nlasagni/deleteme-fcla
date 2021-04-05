@@ -2,8 +2,10 @@ name: Check project
 on:
   push:
     branches:
-      - main
-      - develop
+      -main
+      -develop
+      tags:
+        - "[0-9]+.[0-9]+.[0-9]+"
 jobs:
   check:
     name: Check project

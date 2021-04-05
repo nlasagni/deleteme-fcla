@@ -11,6 +11,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
     id("org.jetbrains.dokka")
     application
+    id("org.kordamp.gradle.jacoco") version "0.45.0"
 }
 
 allprojects {
