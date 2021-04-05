@@ -4,7 +4,6 @@ on:
 jobs:
   generate-coverage:
     name: Generate and deploy coverage
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
