@@ -11,7 +11,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt")
     id("org.jetbrains.dokka")
     application
-    id("org.kordamp.gradle.jacoco") version "0.45.0"
+    //id("org.kordamp.gradle.jacoco") version "0.45.0"
 }
 
 allprojects {
@@ -19,6 +19,8 @@ allprojects {
         jcenter()
     }
 }
+
+val excludeVarName = "excludes"
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
@@ -103,24 +105,57 @@ subprojects {
             jvmTarget = JavaVersion.VERSION_1_8.toString()
         }
     }
-
-    tasks.jacocoTestReport {
-        reports {
-            xml.isEnabled = true
-            html.isEnabled = true
+    afterEvaluate {
+        val excludesVal = if (ext.has(excludeVarName)) ext.get(excludeVarName) as List<String> else listOf("")
+        logger.log(LogLevel.WARN, "Exclude Val: " + excludesVal.toString())
+        tasks.jacocoTestReport {
+            reports {
+                xml.isEnabled = true
+                html.isEnabled = true
+            }
+            classDirectories.setFrom(classDirectories.files.map {
+                fileTree(it).matching {
+                    exclude(excludesVal)
+                }
+            })
         }
     }
 }
 
-dependencies {
-    implementation(kotlin("stdlib-jdk8"))
+val jacocoAggregatedReport by tasks.creating(JacocoReport::class) {
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.50")
+    logger.log(
+        LogLevel.WARN,
+        "ExecData:" + fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec").toString()
+    )
 
-    testImplementation(gradleTestKit())
-    testImplementation("io.kotest:kotest-runner-junit5:4.2.5")
-    testImplementation("io.kotest:kotest-assertions-core:4.2.5")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:4.2.5")
+    executionData.setFrom(
+        fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+    )
+    var classDirs: FileCollection = files()
+    subprojects.forEach {
+        dependsOn(it.tasks.test)
+        dependsOn(it.tasks.jacocoTestReport)
+        logger.log(
+            LogLevel.WARN,
+            "SourceSets:" + it.sourceSets["main"].output.toString()
+        )
+        sourceSets(it.sourceSets.main.get())
+        classDirs += files(it.tasks.jacocoTestReport.get().classDirectories)
+        //classDirectories.setFrom(it.tasks.jacocoTestReport.get().classDirectories)
+    }
+    classDirs.forEach {
+        logger.log(
+            LogLevel.WARN,
+            "ClassDir:" + it.absolutePath
+        )
+    }
+    classDirectories.setFrom(classDirs)
 
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.14.1")
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+        csv.isEnabled = false
+    }
 }
+
