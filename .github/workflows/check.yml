@@ -14,8 +14,10 @@ jobs:
           fetch-depth: 0
       - name: Print branch
         run: |
+          echo "Github ref: ${{ github.ref }}"
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
+          echo "Raw: $raw"
           echo "BRANCH=$branch" >> $GITHUB_ENV
       - name: Test branch
         run: echo ${{ env.BRANCH }}
