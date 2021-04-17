@@ -8,6 +8,9 @@ jobs:
     name: Check project
     runs-on: ubuntu-latest
     steps:
+      - name: Print branch
+        run: |
+          echo "Branch name: ${{github.ref}}"
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
