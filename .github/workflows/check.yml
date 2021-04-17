@@ -4,23 +4,26 @@ on:
     tags:
       - "[0-9]+.[0-9]+.[0-9]+"
 jobs:
-  chech-branch:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Print branch
-      run: |
-        echo "Github ref: ${{ github.ref }}"
-        tbranch=$(git branch)
-        echo "Github branch: $tbranch"
-        raw=$(git branch -r --contains ${{ github.ref }})
-        branch=${raw##*/}
-        echo "Raw: $raw"
-        echo "BRANCH=$branch" >> $GITHUB_ENV
-    - name: Test branch
-      if: ${{ env.BRANCH }} == "develop"
-      run: echo "Pushed tag on correct branch ${{ env.BRANCH }}"
+  check-branch:
+    name: Check branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Print branch
+        run: |
+          echo "Github ref: ${{ github.ref }}"
+          tbranch=$(git branch)
+          echo "Github branch: $tbranch"
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw##*/}
+          echo "Raw: $raw"
+          echo "BRANCH=$branch" >> $GITHUB_ENV
+      - name: Test branch
+        if: ${{ env.BRANCH }} == "develop"
+        run: echo "Pushed tag on correct branch ${{ env.BRANCH }}"
   check:
     if: ${{ env.BRANCH }} == "develop"
     name: Check project
