@@ -8,13 +8,17 @@ jobs:
     name: Check project
     runs-on: ubuntu-latest
     steps:
-      - name: Print branch
-        run: |
-          echo "Branch name: ${{github.ref}}"
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - name: Print branch
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw##*/}
+          echo "BRANCH=$branch" >> $GITHUB_ENV
+      - name: Test branch
+        run: echo ${{ env.BRANCH }}
       - name: Set up JDK
         uses: actions/setup-java@v1
         with:
